@@ -5,7 +5,26 @@ import "../styles/style.css";
 ---
 
 <Navbar />
-<main class="container">
+<main class="container overflow-hidden">
   <slot />
 </main>
 <Footer />
+
+<script>
+  import anime from 'animejs/lib/anime.es';
+  const heroHeading = document.querySelector('.hero-heading');
+  const text = heroHeading.innerHTML;
+  const letters = text.split('').map(letter => `<span class='letter'>${letter}</span>`).join('')
+  heroHeading.innerHTML = letters;
+
+  const timeline = anime.timeline();
+
+  timeline.add({
+    targets: '.letter',
+    translateY: [-20, 0],
+    opacity: [0, 1],
+    duration: 1000,
+    easing: 'easeInExpo',
+    delay: anime.stagger(100)
+  })
+ </script>
